@@ -26,10 +26,10 @@ exports.signup = async (req, res) => {
         subject: `Account activation link`,
         html: `
           <h1>Please use the following link to activate your account</h1>
-          <p>https://warm-griffin-0653de.netlify.app/auth/activates/${token}</p>
+          <p>https://effortless-khapse-a44008.netlify.app/auth/activates/${token}</p>
           <hr />
           <p>This email may contain sensitive information</p>
-          <p>https://warm-griffin-0653de.netlify.app/</p>
+          <p>https://effortless-khapse-a44008.netlify.app/</p>
         `
       };
   
