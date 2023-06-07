@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const cors = require('cors');
-const serverless = require('serverless-http'); 
 
 const app = express();
 
@@ -17,6 +16,8 @@ mongoose
     .catch((error) => {
         console.log(`DB connection error: ${error.message}`);
     });
+
+
 
 const authRoutes = require('./routes/auth');
 const coursesRoutes = require('./routes/courses');
@@ -33,5 +34,6 @@ app.use('/api', authRoutes);
 app.use('/api', coursesRoutes);
 
 const port = process.env.PORT || 8000;
-
-module.exports.handler = serverless(app);
+app.listen(port, () => {
+    console.log(`API is running on port ${port}`);
+});
