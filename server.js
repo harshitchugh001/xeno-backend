@@ -20,7 +20,7 @@ mongoose
 
 
 const authRoutes = require('./routes/auth');
-const coursesRoutes = require('./routes/courses');
+const contactRoutes=require('./routes/contact');
 
 app.get('/', (req, res) => {
     res.send('Hello from Node API');
@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api', authRoutes);
-app.use('/api', coursesRoutes);
+app.use('/api', contactRoutes);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

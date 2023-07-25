@@ -4,9 +4,6 @@ const expressJwt = require('express-jwt');
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-
-
-
 exports.signup = async (req, res) => {
   console.log(req.body)
     try {
@@ -90,13 +87,12 @@ exports.signup = async (req, res) => {
           error: 'User with that email does not exist. Please signup',
         });
       }
-      // authenticate
       if (!user.authenticate(req.body.password)) {
         return res.status(400).json({
           error: 'Email and password do not match',
         });
       }
-      // Generate a token and set it to expire in 2 minutes (120 seconds)
+      
       const payload = {
         _id: user._id,
         userId: user.userId, 
@@ -107,7 +103,7 @@ exports.signup = async (req, res) => {
   
       const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '120s' });
   
-      // Return the token along with other user information
+      
       return res.json({
         token,
         user: payload,
@@ -157,7 +153,6 @@ exports.signup = async (req, res) => {
           error: 'User with that email does not exist',
         });
       }
-  
       const token = jwt.sign({ _id: user._id, name: user.name }, process.env.JWT_RESET_PASSWORD, {
         expiresIn: '10m',
       });
@@ -174,7 +169,6 @@ exports.signup = async (req, res) => {
                   <p>${process.env.CLIENT_URL}</p>
               `,
       };
-  
       user.resetPasswordLink = token;
   
       await user.save();
